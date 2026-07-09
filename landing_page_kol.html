@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMNI TRANSLATE - Cổng Đối Tác KOL/KOC & Đại Sứ Thương Hiệu 2026</title>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #080A0E;
+            --bg-card: rgba(255, 255, 255, 0.025);
+            --bg-card-hover: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-highlight: rgba(245, 158, 11, 0.45);
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --accent-gold-start: #F59E0B;
+            --accent-gold-end: #D97706;
+            --accent-amber: #FBBF24;
+            --accent-cyan: #38BDF8;
+            --accent-emerald: #10B981;
+            --accent-purple: #A855F7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Glowing Orbs */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(160px);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.18;
+            animation: floatOrb 25s infinite alternate ease-in-out;
+        }
+        .orb-1 {
+            top: -10%;
+            left: 10%;
+            width: 700px;
+            height: 700px;
+            background: var(--accent-gold-start);
+        }
+        .orb-2 {
+            bottom: 5%;
+            right: -5%;
+            width: 650px;
+            height: 650px;
+            background: var(--accent-cyan);
+            opacity: 0.12;
+        }
+        .orb-3 {
+            top: 45%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            background: var(--accent-purple);
+            opacity: 0.08;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(60px, 90px) scale(1.15); }
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(24px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(8, 10, 14, 0.88);
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .logo-badge {
+            background: linear-gradient(135deg, var(--accent-gold-start), var(--accent-gold-end));
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+        .btn-header {
+            background: linear-gradient(135deg, var(--accent-gold-start), var(--accent-gold-end));
+            color: #000;
+            padding: 10px 22px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+        .btn-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0 70px;
+            text-align: center;
+        }
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            color: var(--accent-amber);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 28px;
+            box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.3);
+        }
+        .hero h1 {
+            font-size: 4.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            max-width: 980px;
+            margin: 0 auto 24px;
+        }
+        .hero h1 span {
+            background: linear-gradient(135deg, #FFF 20%, var(--accent-gold-start) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 820px;
+            margin: 0 auto 48px;
+            font-weight: 400;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold-start), var(--accent-gold-end));
+            color: #000;
+            padding: 18px 38px;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 15px 35px -10px rgba(245, 158, 11, 0.5);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 45px -10px rgba(245, 158, 11, 0.7);
+        }
+        .btn-secondary {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 18px 36px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(12px);
+        }
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--text-secondary);
+            transform: translateY(-4px);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+        .stat-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(12px);
+        }
+        .stat-item:hover {
+            border-color: var(--accent-gold-start);
+            transform: translateY(-4px);
+        }
+        .stat-num {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent-amber);
+            margin-bottom: 4px;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* Milestone Banner (Thưởng Nóng 1 Triệu) */
+        .milestone-banner {
+            max-width: 1050px;
+            margin: 40px auto 0;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.05) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.5);
+            border-radius: 24px;
+            padding: 32px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            box-shadow: 0 20px 50px -15px rgba(245, 158, 11, 0.25);
+        }
+        .milestone-info {
+            text-align: left;
+            flex: 1;
+        }
+        .milestone-info h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #FFF;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .milestone-info p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        .milestone-badge-box {
+            background: #000;
+            border: 1px solid var(--accent-gold-start);
+            padding: 16px 28px;
+            border-radius: 16px;
+            text-align: center;
+            white-space: nowrap;
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
+        }
+        .milestone-badge-title {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        .milestone-badge-val {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-amber);
+        }
+
+        /* Sections */
+        section {
+            padding: 90px 0;
+            position: relative;
+        }
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+        .section-header h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* 3 Tiers Grid */
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            align-items: stretch;
+            margin-bottom: 60px;
+        }
+        .tier-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px 32px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(16px);
+        }
+        .tier-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8);
+        }
+        .tier-card.featured {
+            background: linear-gradient(180deg, rgba(245, 158, 11, 0.14) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border-color: var(--accent-gold-start);
+            transform: scale(1.05);
+            z-index: 2;
+            box-shadow: 0 30px 60px -15px rgba(245, 158, 11, 0.3);
+        }
+        .tier-card.featured:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+        .tier-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--accent-gold-start), var(--accent-gold-end));
+            color: #000;
+            font-weight: 800;
+            font-size: 0.75rem;
+            padding: 6px 16px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.5);
+            white-space: nowrap;
+        }
+        .tier-header {
+            text-align: center;
+            margin-bottom: 28px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .tier-header h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        .tier-target {
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 4px 14px;
+            border-radius: 20px;
+        }
+        .tier-comm {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--accent-amber);
+            line-height: 1.1;
+        }
+        .tier-comm span {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            display: block;
+        }
+        .tier-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 32px;
+            flex-grow: 1;
+        }
+        .tier-features li {
+            position: relative;
+            padding-left: 24px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .tier-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-amber);
+            font-weight: 800;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .tier-btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        .tier-btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        .tier-btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--text-primary);
+        }
+        .tier-btn-solid {
+            background: linear-gradient(135deg, var(--accent-gold-start), var(--accent-gold-end));
+            color: #000;
+            box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.4);
+        }
+        .tier-btn-solid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -5px rgba(245, 158, 11, 0.6);
+        }
+
+        /* Tier Comparison Table */
+        .comparison-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            overflow-x: auto;
+            backdrop-filter: blur(16px);
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 18px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .comparison-table th {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .comparison-table td {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        .comparison-table td.highlight {
+            color: var(--accent-amber);
+            font-weight: 700;
+        }
+        .comparison-table td.center, .comparison-table th.center {
+            text-align: center;
+        }
+
+        /* Interactive Income Calculator 2.0 */
+        .calculator-section {
+            background: linear-gradient(180deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.03) 100%);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .calc-box {
+            background: #0D1017;
+            border: 1px solid var(--border-highlight);
+            border-radius: 32px;
+            padding: 56px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 48px;
+            align-items: center;
+            box-shadow: 0 40px 80px -20px rgba(0,0,0,0.8);
+        }
+        .calc-inputs h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .calc-inputs p {
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+        }
+        .tier-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+        .tier-select-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .tier-select-btn.active {
+            background: rgba(245, 158, 11, 0.15);
+            border-color: var(--accent-gold-start);
+            color: var(--accent-amber);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+        }
+        .slider-group {
+            margin-bottom: 28px;
+        }
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+        .slider-label span {
+            color: var(--accent-amber);
+            font-size: 1.25rem;
+        }
+        input[type=range] {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--accent-gold-start);
+            cursor: pointer;
+            box-shadow: 0 0 15px var(--accent-gold-start);
+            transition: transform 0.1s;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        .calc-result {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.05) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.45);
+            border-radius: 24px;
+            padding: 36px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        .calc-result h4 {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        .result-amount {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #FFF;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            text-shadow: 0 0 30px rgba(245, 158, 11, 0.5);
+        }
+        .result-sub {
+            color: var(--accent-cyan);
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 16px;
+            padding: 8px 16px;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 12px;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .result-bonus {
+            color: var(--accent-emerald);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            padding: 10px 18px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            border-radius: 14px;
+        }
+        .calc-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* Viral Tools & Content Scripts Section */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+            margin-bottom: 60px;
+        }
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 36px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(16px);
+        }
+        .tool-card:hover {
+            border-color: var(--accent-gold-start);
+            transform: translateY(-4px);
+        }
+        .tool-icon {
+            font-size: 2.4rem;
+            margin-bottom: 18px;
+        }
+        .tool-card h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        .tool-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 18px;
+        }
+        .tool-highlight {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 3px solid var(--accent-gold-start);
+            padding: 12px 16px;
+            border-radius: 0 10px 10px 0;
+            font-size: 0.9rem;
+            color: var(--accent-amber);
+            font-weight: 600;
+        }
+
+        /* Content Scripts Accordion/Tabs */
+        .scripts-container {
+            background: #0D1017;
+            border: 1px solid var(--border-highlight);
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: 0 30px 70px -20px rgba(0,0,0,0.8);
+        }
+        .scripts-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .scripts-header h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .scripts-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        .script-tabs {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+        .script-tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .script-tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-gold-start), var(--accent-gold-end));
+            color: #000;
+            border-color: var(--accent-gold-start);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+        }
+        .script-content-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 28px;
+            position: relative;
+        }
+        .script-text {
+            font-family: monospace, 'Plus Jakarta Sans';
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .btn-copy {
+            background: var(--bg-card-hover);
+            border: 1px solid var(--border-highlight);
+            color: var(--accent-amber);
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-copy:hover {
+            background: var(--accent-gold-start);
+            color: #000;
+        }
+
+        /* Leaderboard */
+        .leaderboard-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            backdrop-filter: blur(16px);
+        }
+        .lb-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.2s ease;
+        }
+        .lb-item:last-child {
+            border-bottom: none;
+        }
+        .lb-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+        }
+        .lb-rank {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+        .rank-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .rank-1 .rank-num { background: var(--accent-gold-start); color: #000; box-shadow: 0 0 15px var(--accent-gold-start); }
+        .rank-2 .rank-num { background: #94A3B8; color: #000; }
+        .rank-3 .rank-num { background: #B45309; color: #FFF; }
+        .lb-name {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .lb-tier {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+        }
+        .lb-rev {
+            font-weight: 800;
+            color: var(--accent-amber);
+            font-size: 1.15rem;
+        }
+
+        /* 4 Reasons Grid */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+        .reason-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(16px);
+        }
+        .reason-icon {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        .reason-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .reason-card p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        /* CTA Bottom */
+        .cta-bottom {
+            margin: 40px 0 80px;
+            background: linear-gradient(135deg, #0D1017 0%, #151A26 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: 36px;
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 40px 100px -20px rgba(0,0,0,0.9);
+        }
+        .cta-bottom h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        .cta-bottom p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 680px;
+            margin: 0 auto 40px;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3rem; }
+            .tiers-grid, .reasons-grid, .tools-grid { grid-template-columns: 1fr; }
+            .calc-box { grid-template-columns: 1fr; padding: 32px; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+            .tier-card.featured { transform: scale(1); }
+            .milestone-banner { flex-direction: column; text-align: center; }
+            .milestone-info { text-align: center; }
+        }
+        @media (max-width: 576px) {
+            .hero h1 { font-size: 2.3rem; }
+            .hero-actions { flex-direction: column; width: 100%; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+            .nav-links { display: none; }
+            .tier-selector { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                ⚡ OMNI TRANSLATE <span class="logo-badge">Affiliate 50%</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#tiers">Cấp Độ Đối Tác</a></li>
+                <li><a href="#comparison">So Sánh Quyền Lợi</a></li>
+                <li><a href="#calculator">Tính Thu Nhập</a></li>
+                <li><a href="#viral-tools">Vũ Khí Viral</a></li>
+                <li><a href="#leaderboard">Đua Top</a></li>
+            </ul>
+            <a href="https://t.me/vntransbot?start=kol_landing" target="_blank" class="btn-header">🚀 Lấy Link Kiếm Tiền Ngay</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-tag">🔥 CHƯƠNG TRÌNH ĐỐI TÁC CHIẾN LƯỢC 2026 • VIETQR SEPAY TỰ ĐỘNG</div>
+            <h1>Biến Tệp Follower Thành <span>Dòng Tiền Thụ Động Trọn Đời</span></h1>
+            <p>Hợp tác cùng Trợ Lý AI Dịch Thuật Văn Bản (Word, Excel, PowerPoint, PDF) giữ nguyên 100% định dạng Layout số 1 Telegram (@vntransbot). Chia sẻ doanh thu nạp đầu lên đến <b>50%</b>, hoa hồng thụ động trọn đời <b>25%</b>, không cần E-KYC phức tạp!</p>
+            
+            <div class="hero-actions">
+                <a href="https://t.me/vntransbot?start=kol_landing" target="_blank" class="btn-primary">
+                    <span>⚡ Lấy Mã Giới Thiệu Ngay (Trong 3 Giây)</span>
+                </a>
+                <a href="#tiers" class="btn-secondary">🏆 Xem Khung Hoa Hồng</a>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-num">50%</div>
+                    <div class="stat-label">Hoa Hồng Đơn Nạp Đầu Tiên</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">15% - 25%</div>
+                    <div class="stat-label">Hoa Hồng Thụ Động Trọn Đời</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">+1,000,000 đ</div>
+                    <div class="stat-label">Thưởng Nóng Mỗi Mốc 10 Triệu</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">0đ / 3s</div>
+                    <div class="stat-label">Không Vốn • Không E-KYC</div>
+                </div>
+            </div>
+
+            <!-- Milestone Cash Bonus Banner -->
+            <div class="milestone-banner">
+                <div class="milestone-info">
+                    <h3>🔥 CHÍNH SÁCH THƯỞNG NÓNG VÔ CỰC: +1,000,000 VNĐ</h3>
+                    <p>Không giới hạn số lần nhận thưởng! Cứ mỗi khi cày đạt mốc <b>10,000,000 VNĐ</b> hoa hồng lũy kế, hệ thống tự động cộng thưởng nóng ngay <b>1,000,000 VNĐ</b> tiền mặt vào tài khoản Bot!</p>
+                </div>
+                <div class="milestone-badge-box">
+                    <div class="milestone-badge-title">Thưởng Nóng Mốc 10M</div>
+                    <div class="milestone-badge-val">+1,000,000 đ</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tiers Section -->
+    <section id="tiers">
+        <div class="container">
+            <div class="section-header">
+                <h2>Bảng Quyền Lợi 3 Cấp Độ Đối Tác (KOL Tiers)</h2>
+                <p>Phân hạng công bằng dựa trên quy mô cộng đồng và tệp người theo dõi (Followers) của bạn. Tất cả đối tác đều nhận <b>50% hoa hồng đơn nạp đầu</b>, hoa hồng thụ động trọn đời tăng tiến theo cấp độ!</p>
+            </div>
+
+            <div class="tiers-grid">
+                <!-- Tier 1: KOC Tập Sự -->
+                <div class="tier-card">
+                    <div class="tier-header">
+                        <h3>Tier 1: KOC Tập Sự</h3>
+                        <div class="tier-target">🌱 Dưới 10,000 Followers</div>
+                        <div class="tier-comm">50% <span>+ 15% Thụ Động Trọn Đời</span></div>
+                    </div>
+                    <ul class="tier-features">
+                        <li>Dành cho KOC mới, Sinh viên & Thành viên tích cực</li>
+                        <li>Hoa hồng đơn nạp đầu tiên <b>50%</b> siêu khủng</li>
+                        <li>Hoa hồng thụ động <b>15%</b> trọn đời các lần nạp sau</li>
+                        <li>Tặng <b>+2 trang dịch miễn phí</b> cho Fan khi nhập mã</li>
+                        <li>Đăng ký lấy link ngay trên Bot trong 3 giây</li>
+                        <li>Không yêu cầu thủ tục E-KYC phức tạp</li>
+                        <li>Thanh toán minh bạch ngày 22 hàng tháng (Min 50,000 VNĐ)</li>
+                    </ul>
+                    <a href="https://t.me/vntransbot?start=kol_landing" target="_blank" class="tier-btn tier-btn-outline">Tham Gia KOC Tập Sự</a>
+                </div>
+
+                <!-- Tier 2: KOC Đối Tác (Featured) -->
+                <div class="tier-card featured">
+                    <div class="tier-badge">🔥 Phổ Biến Nhất</div>
+                    <div class="tier-header">
+                        <h3>Tier 2: KOC Đối Tác</h3>
+                        <div class="tier-target">🚀 10,000 - 50,000 Followers</div>
+                        <div class="tier-comm">50% <span>+ 20% Thụ Động Trọn Đời</span></div>
+                    </div>
+                    <ul class="tier-features">
+                        <li>Dành cho Admin Group ĐH, Hội Kỹ sư, TikToker Tech</li>
+                        <li>Hoa hồng đơn nạp đầu tiên <b>50%</b> siêu khủng</li>
+                        <li>Hoa hồng thụ động <b>20%</b> trọn đời các lần nạp sau</li>
+                        <li>Được cấp <b>Mã Giới Thiệu riêng</b> (Vanity Ref Code)</li>
+                        <li>Quyền tự tạo mã giảm giá <b>10% Fan Discount</b></li>
+                        <li>Tặng Fan <b>+2 trang dịch miễn phí</b> trải nghiệm ngay</li>
+                        <li>Được sử dụng bộ Kịch bản Viral Seeding Copy & Paste</li>
+                        <li>Thanh toán minh bạch ngày 22 hàng tháng qua VietQR</li>
+                    </ul>
+                    <a href="https://t.me/vntransbot?start=kol_landing" target="_blank" class="tier-btn tier-btn-solid">Tham Gia KOC Đối Tác</a>
+                </div>
+
+                <!-- Tier 3: KOL Đại Sứ VIP -->
+                <div class="tier-card">
+                    <div class="tier-header">
+                        <h3>Tier 3: KOL Đại Sứ VIP</h3>
+                        <div class="tier-target">👑 Trên 50,000 Followers</div>
+                        <div class="tier-comm">50% <span>+ 25% Thụ Động Trọn Đời</span></div>
+                    </div>
+                    <ul class="tier-features">
+                        <li>Dành cho KOL Top Đầu, Tech Reviewer & Admin Lớn</li>
+                        <li>Hoa hồng đơn nạp đầu tiên <b>50%</b> siêu khủng</li>
+                        <li>Hoa hồng thụ động tối đa <b>25%</b> trọn đời các lần nạp sau</li>
+                        <li>Quyền tạo mã giảm giá sâu <b>20% cho Fan</b> + Tặng <b>+2 trang Free</b></li>
+                        <li>Tài khoản VIP dịch hồ sơ ưu tiên gấp 3 lần tốc độ</li>
+                        <li>Tham gia giải đấu <b>Đua Top Doanh Số</b> (Thưởng nóng đến 2 Triệu)</li>
+                        <li>Có Manager hỗ trợ 1:1 kỹ thuật và kịch bản riêng</li>
+                        <li>Thanh toán minh bạch ngày 22 hàng tháng (Min 50,000 VNĐ)</li>
+                    </ul>
+                    <a href="https://t.me/vntransbot?start=kol_landing" target="_blank" class="tier-btn tier-btn-outline">Đăng Ký Đại Sứ VIP</a>
+                </div>
+            </div>
+
+            <!-- Tier Comparison Table -->
+            <div id="comparison" class="comparison-box">
+                <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 24px; text-align: center;">📊 Bảng So Sánh Chi Tiết Quyền Lợi Đối Tác</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Quyền Lợi & Tính Năng</th>
+                            <th class="center">Tier 1: KOC Tập Sự</th>
+                            <th class="center">Tier 2: KOC Đối Tác</th>
+                            <th class="center">Tier 3: Đại Sứ VIP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Hoa Hồng Đơn Nạp Đầu Tiên</b></td>
+                            <td class="center highlight">50%</td>
+                            <td class="center highlight">50%</td>
+                            <td class="center highlight">50%</td>
+                        </tr>
+                        <tr>
+                            <td><b>Hoa Hồng Thụ Động Trọn Đời (Recurring)</b></td>
+                            <td class="center">15%</td>
+                            <td class="center highlight">20%</td>
+                            <td class="center highlight" style="color: var(--accent-gold-start); font-size: 1.1rem;">25% (Max)</td>
+                        </tr>
+                        <tr>
+                            <td><b>Thưởng Nóng Mốc 10,000,000 VNĐ</b></td>
+                            <td class="center">+1,000,000 VNĐ</td>
+                            <td class="center">+1,000,000 VNĐ</td>
+                            <td class="center">+1,000,000 VNĐ</td>
+                        </tr>
+                        <tr>
+                            <td><b>Quà Tặng Cho Fan (Trang Dịch Miễn Phí)</b></td>
+                            <td class="center">+2 Trang Free</td>
+                            <td class="center">+2 Trang Free</td>
+                            <td class="center">+2 Trang Free</td>
+                        </tr>
+                        <tr>
+                            <td><b>Tạo Mã Giảm Giá Riêng Cho Fan (Discount Coupon)</b></td>
+                            <td class="center">Không</td>
+                            <td class="center" style="color: var(--accent-cyan); font-weight: 700;">Giảm 10%</td>
+                            <td class="center" style="color: var(--accent-emerald); font-weight: 700;">Giảm 20%</td>
+                        </tr>
+                        <tr>
+                            <td><b>Đổi Mã Giới Thiệu Cá Nhân Hóa (Vanity Ref Code)</b></td>
+                            <td class="center">Có</td>
+                            <td class="center">Có (Ưu tiên)</td>
+                            <td class="center">Có (Ưu tiên VIP)</td>
+                        </tr>
+                        <tr>
+                            <td><b>Bộ Kịch Bản Content Viral Copy-Paste</b></td>
+                            <td class="center">Mẫu Tiêu Chuẩn</td>
+                            <td class="center">Mẫu Chuyên Sâu</td>
+                            <td class="center">Kịch Bản Custom Riêng</td>
+                        </tr>
+                        <tr>
+                            <td><b>Hỗ Trợ Kỹ Thuật & Manager 1:1</b></td>
+                            <td class="center">Cộng Đồng Bot</td>
+                            <td class="center">Hỗ Trợ Ưu Tiên 24/7</td>
+                            <td class="center">Manager 1:1 Riêng</td>
+                        </tr>
+                        <tr>
+                            <td><b>Lịch Thanh Toán & Min Rút</b></td>
+                            <td colspan="3" class="center"><b>Ngày 22 hàng tháng</b> qua VietQR SePay tự động (Min rút siêu thấp chỉ từ <b>50,000 VNĐ</b>)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Income Calculator 2.0 -->
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>🧮 Máy Tính Thu Nhập Thụ Động 2.0</h2>
+                <p>Chọn cấp độ của bạn và kéo thanh trượt để giả lập số lượng người dùng & mức nạp. Nhìn dòng tiền hoa hồng và thưởng nóng tự động nhảy múa!</p>
+            </div>
+
+            <div class="calc-box">
+                <div class="calc-inputs">
+                    <h3>Thông Số Giả Lập Kênh Của Bạn</h3>
+                    <p>Khách hàng chỉ cần quét VietQR nạp 1 lần, bạn hưởng hoa hồng nạp đầu 50% + hoa hồng thụ động trọn đời các lần sau!</p>
+
+                    <div class="tier-selector">
+                        <button class="tier-select-btn" onclick="selectTier(0.15, this)">Tier 1 (15% Thụ động)</button>
+                        <button class="tier-select-btn active" onclick="selectTier(0.20, this)">Tier 2 (20% Thụ động)</button>
+                        <button class="tier-select-btn" onclick="selectTier(0.25, this)">Tier 3 (25% Thụ động)</button>
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>👥 Số khách hàng nạp tiền qua link:</span>
+                            <span id="val-users">200 người</span>
+                        </div>
+                        <input type="range" id="slider-users" min="10" max="2000" step="10" value="200">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>💳 Mức nạp trung bình mỗi khách:</span>
+                            <span id="val-spend">150,000 đ</span>
+                        </div>
+                        <input type="range" id="slider-spend" min="50000" max="1000000" step="50000" value="150000">
+                    </div>
+                </div>
+
+                <div class="calc-result">
+                    <h4>THU NHẬP ĐƠN NẠP ĐẦU (HOA HỒNG 50%)</h4>
+                    <div class="result-amount" id="calc-income">15,000,000 đ</div>
+                    <div class="result-sub" id="calc-passive">+ 6,000,000 đ thụ động/tháng các lần nạp sau</div>
+                    <div class="result-bonus" id="calc-bonus">🔥 Thưởng nóng mốc 10M: +1,000,000 đ</div>
+                    <p class="calc-note">💡 Tiền hoa hồng được thống kê ngay trên Bot. Hệ thống thanh toán minh bạch vào <b>ngày 22 hàng tháng</b> qua VietQR SePay tự động (Min rút chỉ 50,000 VNĐ)!</p>
+                    <a href="https://t.me/vntransbot?start=kol_landing" target="_blank" class="btn-primary" style="justify-content: center; width: 100%;">
+                        <span>🚀 Lấy Link Bắt Đầu Kiếm Tiền Ngay</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Viral Tools & Content Scripts Section -->
+    <section id="viral-tools">
+        <div class="container">
+            <div class="section-header">
+                <h2>🎁 Bộ Công Cụ & Kịch Bản Viral (Copy & Paste)</h2>
+                <p>Bạn không cần phải tự nghĩ content hay đi "quảng cáo rác". Chúng tôi cung cấp trọn bộ vũ Khí độc quyền giúp bạn rải link là có tiền!</p>
+            </div>
+
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">🏷️</div>
+                    <h3>Đổi Mã Giới Thiệu Cá Nhân Hóa (Vanity Ref Code)</h3>
+                    <p>Thay vì đường link những con số ngẫu nhiên khó nhớ, bạn được quyền tự đổi mã giới thiệu đậm chất thương hiệu cá nhân của mình (VD: <code>VIP_TECH</code>, <code>KOL_NAM</code>, <code>ENG_GROUP</code>).</p>
+                    <div class="tool-highlight">⚡ Tăng 40% tỷ lệ click nhờ đường link uy tín & chuyên nghiệp!</div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">🎟️</div>
+                    <h3>Quyền Lực Tạo Mã Giảm Giá Riêng Cho Fan</h3>
+                    <p>Bạn được quyền tự tạo mã giảm giá <b>10% - 20%</b> (Discount Coupon) dành riêng cho cộng đồng của mình. Fan cảm thấy được đặc quyền ưu đãi và tự nguyện nạp tiền trải nghiệm!</p>
+                    <div class="tool-highlight">🔥 Chốt đơn cực ngọt khi Fan được giảm giá trực tiếp vào đơn nạp!</div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">🎁</div>
+                    <h3>Quà Tặng Miễn Phí: +2 Trang Dịch Cho Khách</h3>
+                    <p>Khi khách hàng nhấn vào đường link hoặc nhập mã giới thiệu của bạn, họ sẽ được tặng ngay <b>+2 trang dịch miễn phí 100%</b> để trải nghiệm chất lượng giữ nguyên định dạng layout của Bot!</p>
+                    <div class="tool-highlight">💡 Xóa bỏ hoàn toàn rào cản nghi ngờ, tỷ lệ đăng ký dùng thử đạt >85%!</div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">📅</div>
+                    <h3>Thanh Toán Minh Bạch Ngày 22 Hàng Tháng</h3>
+                    <p>Không cần chờ đợi hạn mức cao hay thủ tục phức tạp. Hệ thống tự động quyết toán và chuyển khoản thẳng về ATM qua VietQR SePay vào <b>ngày 22 hàng tháng</b> với min rút siêu thấp chỉ từ <b>50,000 VNĐ</b>!</p>
+                    <div class="tool-highlight">💸 Dòng tiền đều đặn, minh bạch tuyệt đối, an tâm phát triển dài lâu!</div>
+                </div>
+            </div>
+
+            <!-- Content Scripts Accordion/Tabs -->
+            <div class="scripts-container">
+                <div class="scripts-header">
+                    <h3>📝 3 Mẫu Content Viral Copy & Paste (Sẵn Sàng Seeding)</h3>
+                    <p>Chọn mẫu kịch bản phù hợp với nền tảng của bạn, bấm nút Copy và chỉnh sửa mã giới thiệu của bạn vào là xong!</p>
+                </div>
+
+                <div class="script-tabs">
+                    <button class="script-tab-btn active" onclick="showScript(0, this)">🎬 TikTok / Reels (Video Review 30s)</button>
+                    <button class="script-tab-btn" onclick="showScript(1, this)">📘 Facebook / Group Kỹ Sư & Sinh Viên</button>
+                    <button class="script-tab-btn" onclick="showScript(2, this)">💬 Telegram / Zalo / Bio Link</button>
+                </div>
+
+                <div class="script-content-box">
+                    <div id="script-text-display" class="script-text">[Hook] Dân văn phòng, sinh viên hay kỹ sư chắc chắn ai cũng từng bị ác mộng này: Dịch tài liệu tiếng Anh, tiếng Trung qua Google Dịch xong vỡ nát hết bảng biểu Excel, vỡ khung Word hay PowerPoint, sửa lại mất cả buổi! 😭
+[Solution] Nhưng từ ngày biết đến Trợ lý AI dịch thuật @vntransbot trên Telegram này, mình nhàn hẳn!
+[Demo] Chỉ cần chuyển tiếp (forward) file Word, Excel, PDF hay PowerPoint thẳng vào Bot, 3 giây sau có ngay bản dịch giữ nguyên 100% định dạng layout gốc! Dịch chuẩn ngữ cảnh chuyên ngành, đọc mượt cực kỳ.
+[Offer/CTA] Đặc biệt, mình có xin được quà cho mọi người đây: Nhấn vào link bên dưới (hoặc nhập mã VIP_KOL của mình), các bạn sẽ được tặng ngay +2 trang dịch MIỄN PHÍ và giảm ngay 10% khi nạp trải nghiệm nhé! Thử ngay đi, tiện lắm! 👇
+👉 Link nhận ưu đãi: https://t.me/vntransbot?start=YOUR_REF_CODE</div>
+                    <button class="btn-copy" onclick="copyCurrentScript()">📋 Copy Kịch Bản Này</button>
+                    <span id="copy-status" style="margin-left: 14px; color: var(--accent-emerald); font-weight: 600; display: none;">✓ Đã sao chép vào bộ nhớ tạm!</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Preview -->
+    <section id="leaderboard">
+        <div class="container">
+            <div class="section-header">
+                <h2>🏆 Bảng Xếp Hạng Đua Top Doanh Số</h2>
+                <p>Top Đối tác xuất sắc nhất được vinh danh trên hệ thống và nhận thưởng nóng tiền mặt lên đến +2 Triệu đồng bên cạnh mốc thưởng lũy kế!</p>
+            </div>
+
+            <div class="leaderboard-box">
+                <div class="lb-item rank-1">
+                    <div class="lb-rank">
+                        <span class="rank-num">1</span>
+                        <span class="lb-name">Nguyễn Hữu Tài (Kênh Tech Review) <span class="lb-tier">👑 Đại Sứ VIP</span></span>
+                    </div>
+                    <div class="lb-rev">48,500,000 đ <span style="font-size: 0.8rem; color: var(--accent-emerald); display: block; text-align: right;">🔥 +4,000k thưởng nóng mốc & Top 1</span></div>
+                </div>
+
+                <div class="lb-item rank-2">
+                    <div class="lb-rank">
+                        <span class="rank-num">2</span>
+                        <span class="lb-name">Hội Kỹ Sư Xây Dựng & CAD <span class="lb-tier">🚀 KOC Đối Tác</span></span>
+                    </div>
+                    <div class="lb-rev">32,100,000 đ <span style="font-size: 0.8rem; color: var(--accent-emerald); display: block; text-align: right;">🔥 +3,000k thưởng nóng mốc & Top 2</span></div>
+                </div>
+
+                <div class="lb-item rank-3">
+                    <div class="lb-rank">
+                        <span class="rank-num">3</span>
+                        <span class="lb-name">Trần Phương Mai (ĐH Ngoại Thương) <span class="lb-tier">🚀 KOC Đối Tác</span></span>
+                    </div>
+                    <div class="lb-rev">24,800,000 đ <span style="font-size: 0.8rem; color: var(--accent-emerald); display: block; text-align: right;">🔥 +2,000k thưởng nóng mốc & Top 3</span></div>
+                </div>
+
+                <div class="lb-item">
+                    <div class="lb-rank">
+                        <span class="rank-num" style="background: transparent; color: var(--text-muted);">4</span>
+                        <span class="lb-name">Hoàng Văn Nam (Group MEP) <span class="lb-tier">🌱 KOC Tập Sự</span></span>
+                    </div>
+                    <div class="lb-rev">18,200,000 đ <span style="font-size: 0.8rem; color: var(--accent-emerald); display: block; text-align: right;">🔥 +1,000k thưởng nóng mốc</span></div>
+                </div>
+
+                <div class="lb-item">
+                    <div class="lb-rank">
+                        <span class="rank-num" style="background: transparent; color: var(--text-muted);">5</span>
+                        <span class="lb-name">Lê Thị Thảo (Hội Kế Toán XNK) <span class="lb-tier">🌱 KOC Tập Sự</span></span>
+                    </div>
+                    <div class="lb-rev">15,600,000 đ <span style="font-size: 0.8rem; color: var(--accent-emerald); display: block; text-align: right;">🔥 +1,000k thưởng nóng mốc</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4 Reasons -->
+    <section id="reasons">
+        <div class="container">
+            <div class="section-header">
+                <h2>4 Vũ Khí Chốt Đơn Giúp Bạn Rải Link Là Có Tiền</h2>
+                <p>Sản phẩm cực kỳ chất lượng, giải quyết đúng nỗi đau lớn nhất của tệp dân văn phòng, kỹ sư và sinh viên.</p>
+            </div>
+
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <div class="reason-icon">📑</div>
+                    <h3>Giữ Nguyên 100% Layout & Format</h3>
+                    <p>Khách hàng cực kỳ sợ dùng Google Dịch làm vỡ nát bảng biểu Excel, Word hay PowerPoint. Bot của chúng ta giữ nguyên 100% định dạng, dịch xong dùng ngay không cần chỉnh sửa!</p>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-icon">⚡</div>
+                    <h3>Dịch Thần Tốc - Share 1 Chạm</h3>
+                    <p>Khách đang đọc tài liệu trên Zalo, Gmail hay Google Drive, chỉ cần bấm "Chia sẻ" (Share/Forward) thẳng vào Bot Telegram là có ngay bản dịch trong 3 giây. Trải nghiệm di động tiện lợi vô địch!</p>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-icon">🎁</div>
+                    <h3>Quyền Lực Tặng Quà Cho Fan</h3>
+                    <p>Bạn không phải đi "quảng cáo rác". Với Mã Giới Thiệu riêng, bạn đang mang QUÀ (Trang dịch free & Mã giảm giá 10% - 20%) đến cho cộng đồng của mình. Fan biết ơn và tự nguyện nạp tiền!</p>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-icon">🛡️</div>
+                    <h3>Không Rào Cản E-KYC - Uy Tín 100%</h3>
+                    <p>Bắt đầu kiếm tiền ngay trong 3 giây mà không cần thủ tục giấy tờ E-KYC lằng nhằng lúc đăng ký. Hệ thống thanh toán VietQR SePay pháp nhân minh bạch vào ngày 22 hàng tháng!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section>
+        <div class="container">
+            <div class="cta-bottom">
+                <h2>Sẵn Sàng Xây Dựng Dòng Tiền Thụ Động?</h2>
+                <p>Gia nhập mạng lưới Đối Tác Chiến Lược ngay hôm nay. Lấy mã giới thiệu độc quyền, nhận hoa hồng nạp đầu 50%, thụ động trọn đời 25% và thưởng nóng mốc 1 Triệu!</p>
+                <a href="https://t.me/vntransbot?start=kol_landing" target="_blank" class="btn-primary" style="font-size: 1.25rem; padding: 22px 48px;">
+                    <span>⚡ Lấy Link Kiếm Tiền Trên Telegram Ngay</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 OMNI TRANSLATE AI. Chương trình Đối tác Affiliate & KOL/KOC chiến lược.</p>
+            <p style="margin-top: 8px; font-size: 0.85rem; color: #475569;">Thanh toán VietQR SePay tự động vào ngày 22 hàng tháng • Min rút 50,000 VNĐ • Minh bạch 24/7 • Hoa hồng trọn đời</p>
+        </div>
+    </footer>
+
+    <script>
+        // Income Calculator Script
+        const sliderUsers = document.getElementById('slider-users');
+        const sliderSpend = document.getElementById('slider-spend');
+        const valUsers = document.getElementById('val-users');
+        const valSpend = document.getElementById('val-spend');
+        const calcIncome = document.getElementById('calc-income');
+        const calcPassive = document.getElementById('calc-passive');
+        const calcBonus = document.getElementById('calc-bonus');
+
+        let currentTierRate = 0.20; // Default Tier 2 (20%)
+
+        function selectTier(rate, btnElement) {
+            currentTierRate = rate;
+            const buttons = document.querySelectorAll('.tier-select-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            updateCalc();
+        }
+
+        function updateCalc() {
+            const users = parseInt(sliderUsers.value);
+            const spend = parseInt(sliderSpend.value);
+
+            valUsers.innerText = `${users.toLocaleString('vi-VN')} người`;
+            valSpend.innerText = `${spend.toLocaleString('vi-VN')} đ`;
+
+            // Total revenue generated
+            const totalRev = users * spend;
+
+            // 50% first deposit commission
+            const firstIncome = totalRev * 0.50;
+            calcIncome.innerText = `${firstIncome.toLocaleString('vi-VN')} đ`;
+
+            // Passive lifetime commission based on selected Tier (15%, 20%, 25%)
+            // Assuming average repeat spend per month equals 50% of first deposit volume
+            const passiveIncome = (totalRev * 0.50) * currentTierRate;
+            calcPassive.innerText = `+ ${passiveIncome.toLocaleString('vi-VN')} đ thụ động/tháng các lần nạp sau`;
+
+            // Milestone cash bonus: +1,000,000 VND for every 10,000,000 VND earned in commission
+            const bonusCount = Math.floor(firstIncome / 10000000);
+            const bonusAmount = bonusCount * 1000000;
+            if (bonusCount > 0) {
+                calcBonus.innerText = `🔥 Thưởng nóng mốc 10M: +${bonusAmount.toLocaleString('vi-VN')} đ (${bonusCount} lần mốc)`;
+                calcBonus.style.display = 'inline-block';
+            } else {
+                calcBonus.innerText = `🔥 Thưởng nóng mốc 10M: Cày thêm ${(10000000 - firstIncome).toLocaleString('vi-VN')} đ để nhận +1,000,000 đ thưởng nóng!`;
+                calcBonus.style.display = 'inline-block';
+            }
+        }
+
+        sliderUsers.addEventListener('input', updateCalc);
+        sliderSpend.addEventListener('input', updateCalc);
+        updateCalc();
+
+        // Content Scripts Tab System
+        const scripts = [
+`[Hook] Dân văn phòng, sinh viên hay kỹ sư chắc chắn ai cũng từng bị ác mộng này: Dịch tài liệu tiếng Anh, tiếng Trung qua Google Dịch xong vỡ nát hết bảng biểu Excel, vỡ khung Word hay PowerPoint, sửa lại mất cả buổi! 😭
+[Solution] Nhưng từ ngày biết đến Trợ lý AI dịch thuật @vntransbot trên Telegram này, mình nhàn hẳn!
+[Demo] Chỉ cần chuyển tiếp (forward) file Word, Excel, PDF hay PowerPoint thẳng vào Bot, 3 giây sau có ngay bản dịch giữ nguyên 100% định dạng layout gốc! Dịch chuẩn ngữ cảnh chuyên ngành, đọc mượt cực kỳ.
+[Offer/CTA] Đặc biệt, mình có xin được quà cho mọi người đây: Nhấn vào link bên dưới (hoặc nhập mã VIP_KOL của mình), các bạn sẽ được tặng ngay +2 trang dịch MIỄN PHÍ và giảm ngay 10% khi nạp trải nghiệm nhé! Thử ngay đi, tiện lắm! 👇
+👉 Link nhận ưu đãi: https://t.me/vntransbot?start=YOUR_REF_CODE`,
+
+`🔥 [GÓC CHIA SẺ] BẢO BỐI DỊCH TÀI LIỆU CHUYÊN NGÀNH GIỮ NGUYÊN 100% ĐỊNH DẠNG LAYOUT CHO ANH EM!
+
+Anh em làm kỹ thuật, xây dựng, kinh tế hay sinh viên làm đồ án chắc quá quen với cảnh dịch tài liệu ngoại ngữ (Word, Excel, PDF, PowerPoint) bằng mấy tool miễn phí bị lỗi phông, lệch bảng biểu, ngồi căn chỉnh lại mất cả ngày trời.
+
+Hôm nay mình chia sẻ cho anh em con Trợ lý AI dịch thuật văn bản cực kỳ bá đạo ngay trên Telegram (@vntransbot).
+✅ Giữ nguyên 100% định dạng Layout gốc (bảng biểu, sơ đồ, hình ảnh không bị xô lệch một milimet nào).
+✅ Dịch siêu tốc trong 3 giây: Đang đọc tài liệu trên Zalo, Drive hay Gmail chỉ cần bấm bấm Share/Forward thẳng vào Bot là xong.
+✅ Thuật ngữ chuyên ngành chuẩn xác, không bị dịch ngô nghê word-by-word.
+
+🎁 QUÀ TẶNG ĐẶC BIỆT CHO ANH EM TRONG GROUP:
+Mình đã đăng ký đối tác và xin được ưu đãi cho mọi người: Bấm vào đường link bên dưới, anh em sẽ được TẶNG NGAY +2 TRANG DỊCH MIỄN PHÍ và mã giảm giá 10% khi trải nghiệm!
+👉 Trải nghiệm ngay tại đây: https://t.me/vntransbot?start=YOUR_REF_CODE`,
+
+`⚡ [QUÀ TẶNG HOT] Tặng ngay +2 trang dịch MIỄN PHÍ và mã giảm 10% trải nghiệm Trợ lý AI dịch văn bản (Word, Excel, PDF, PowerPoint) giữ nguyên 100% định dạng Layout số 1 Telegram! Dịch thần tốc 3s không vỡ bảng biểu.
+👉 Bấm nhận quà ngay: https://t.me/vntransbot?start=YOUR_REF_CODE`
+        ];
+
+        let currentScriptIndex = 0;
+
+        function showScript(index, btnElement) {
+            currentScriptIndex = index;
+            const buttons = document.querySelectorAll('.script-tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            document.getElementById('script-text-display').innerText = scripts[index];
+            document.getElementById('copy-status').style.display = 'none';
+        }
+
+        function copyCurrentScript() {
+            const textToCopy = scripts[currentScriptIndex];
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const status = document.getElementById('copy-status');
+                status.style.display = 'inline';
+                setTimeout(() => {
+                    status.style.display = 'none';
+                }, 3000);
+            });
+        }
+    </script>
+</body>
+</html>
