@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOMNI TRANSLATE - Trợ Lý AI Dịch Thuật Văn Bản 5 Sao Giữ Nguyên Layout</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="shortcut icon" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #FFFFFF;
+            --bg-card: #FFFFFF;
+            --bg-card-hover: #F8FAFC;
+            --bg-glass: rgba(255, 255, 255, 0.88);
+            --border-color: #E2E8F0;
+            --border-highlight: rgba(37, 99, 235, 0.4);
+            --border-gold: rgba(217, 119, 6, 0.4);
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --accent-cyan-start: #2563EB;
+            --accent-cyan-end: #1D4ED8;
+            --accent-purple: #4F46E5;
+            --accent-gold: #D97706;
+            --accent-emerald: #059669;
+            --accent-rose: #E11D48;
+            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 4px 10px -6px rgba(15, 23, 42, 0.04);
+            --shadow-featured: 0 20px 40px -10px rgba(37, 99, 235, 0.18);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Background Glowing Orbs (Light Mode Soft Radial Gradients) */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(140px);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.35;
+            animation: floatOrb 22s infinite alternate ease-in-out;
+        }
+        .orb-1 {
+            top: -10%;
+            left: 5%;
+            width: 700px;
+            height: 700px;
+            background: #EFF6FF;
+        }
+        .orb-2 {
+            bottom: 10%;
+            right: -5%;
+            width: 650px;
+            height: 650px;
+            background: #EEF2FF;
+        }
+        .orb-3 {
+            top: 45%;
+            left: -15%;
+            width: 550px;
+            height: 550px;
+            background: #FFFBEB;
+            opacity: 0.25;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(60px, 90px) scale(1.15); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Navigation */
+        header {
+            padding: 16px 0;
+            border-bottom: 1px solid #E2E8F0;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #0F172A;
+            text-decoration: none;
+        }
+        .nav-bot-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid #3B82F6;
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.35);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .logo:hover .nav-bot-logo {
+            transform: rotate(12deg) scale(1.12);
+        }
+        .logo-badge {
+            background: #EFF6FF;
+            color: #2563EB;
+            border: 1px solid #BFDBFE;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #334155;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: -0.01em;
+            transition: all 0.2s ease;
+        }
+        .nav-links a:hover {
+            color: var(--accent-cyan-start);
+        }
+        .btn-header {
+            background: linear-gradient(135deg, var(--accent-cyan-start), var(--accent-cyan-end));
+            color: #FFFFFF;
+            padding: 10px 22px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(37, 99, 235, 0.4);
+        }
+
+        /* 2-Column Hero Section */
+        .hero {
+            padding: 90px 0 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .hero-content {
+            text-align: left;
+            z-index: 2;
+        }
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--accent-cyan-start);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            box-shadow: 0 0 25px -5px rgba(56, 189, 248, 0.3);
+            animation: pulseGlow 3s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px -5px rgba(56, 189, 248, 0.3); }
+            100% { box-shadow: 0 0 30px 5px rgba(56, 189, 248, 0.6); }
+        }
+        .hero-content h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            margin: 0 0 22px;
+            color: #0F172A;
+        }
+        .hero-content h1 span {
+            background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 50%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #475569;
+            margin: 0 0 36px;
+            font-weight: 400;
+            line-height: 1.7;
+            max-width: 580px;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 44px;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-cyan-start), var(--accent-cyan-end));
+            color: #FFFFFF;
+            padding: 18px 36px;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 15px 35px -10px rgba(56, 189, 248, 0.5);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(60deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: rotate(45deg) translate(-100%, -100%);
+            transition: transform 0.6s ease;
+        }
+        .btn-primary:hover::after {
+            transform: rotate(45deg) translate(100%, 100%);
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -10px rgba(56, 189, 248, 0.7);
+            color: #FFFFFF;
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.85);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 16px 32px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-cyan-start);
+            transform: translateY(-4px);
+            color: var(--accent-cyan-start);
+        }
+        
+        /* Formats Bar */
+        .formats-bar {
+            display: inline-flex;
+            align-items: center;
+            gap: 28px;
+            padding: 18px 32px;
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+        }
+        .format-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            color: #334155;
+            font-size: 0.95rem;
+        }
+        .format-icon {
+            font-size: 1.35rem;
+        }
+
+        /* Hero Visual Centerpiece & Mascot */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+            padding: 20px 0;
+        }
+        .hero-visual-glow {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, rgba(6, 183, 212, 0.18) 50%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            animation: pulseVisualGlow 4.5s infinite alternate ease-in-out;
+        }
+        @keyframes pulseVisualGlow {
+            0% { transform: scale(0.92); opacity: 0.65; }
+            100% { transform: scale(1.12); opacity: 1; }
+        }
+        .hero-mascot-box {
+            position: relative;
+            z-index: 2;
+            animation: floatMascot 4.5s infinite ease-in-out;
+        }
+        @keyframes floatMascot {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-16px); }
+            100% { transform: translateY(0px); }
+        }
+        .hero-mascot-img {
+            width: 100%;
+            max-width: 410px;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 28px 60px -15px rgba(29, 78, 216, 0.38), 0 0 0 1.5px rgba(255, 255, 255, 0.9);
+            display: block;
+        }
+
+        /* Floating Glass Badges around Mascot */
+        .float-badge {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(255, 255, 255, 0.98);
+            padding: 10px 18px;
+            border-radius: 50px;
+            box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.14), 0 0 12px rgba(37, 99, 235, 0.08);
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #0F172A;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 3;
+            white-space: nowrap;
+        }
+        .float-badge.badge-top {
+            top: 15px;
+            left: -15px;
+            animation: floatBadge1 3.8s infinite ease-in-out;
+        }
+        .float-badge.badge-right {
+            bottom: 65px;
+            right: -20px;
+            animation: floatBadge2 4.2s infinite ease-in-out;
+        }
+        .float-badge.badge-bottom {
+            bottom: -12px;
+            left: 20px;
+            animation: floatBadge3 5s infinite ease-in-out;
+        }
+        @keyframes floatBadge1 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes floatBadge2 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+        @keyframes floatBadge3 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+        /* Section Styling */
+        section {
+            padding: 90px 0;
+            position: relative;
+        }
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 56px;
+        }
+        .section-header h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+        .section-header h2 span {
+            background: linear-gradient(135deg, var(--accent-cyan-start), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* FREE TRIAL & REFERRAL PERKS BANNER (NEW) */
+        .perks-banner {
+            background: linear-gradient(135deg, #EFF6FF 0%, #EEF2FF 50%, #FFFBEB 100%);
+            border: 1px solid #BFDBFE;
+            border-radius: 28px;
+            padding: 48px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            align-items: center;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .perks-banner::before {
+            content: '🎁 ĐẶC QUYỀN VIP';
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: linear-gradient(135deg, var(--accent-gold), #D97706);
+            color: #FFFFFF;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 6px 40px;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .perk-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .perk-icon-wrapper {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-sm);
+        }
+        .perk-text h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        .perk-text h3 span {
+            color: var(--accent-gold);
+        }
+        .perk-text p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .perk-badge {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 12px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: var(--accent-emerald);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* PSYCHOLOGICAL ANCHORING - COMPARISON TABLE (NEW) */
+        .comparison-section {
+            background: linear-gradient(180deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.025) 100%);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+        .compare-card {
+            background: var(--bg-card);
+            border: 1.5px solid #CBD5E1;
+            border-radius: 28px;
+            padding: 44px 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
+        }
+        .compare-card.bad {
+            border-color: #FECDD3;
+            background: linear-gradient(180deg, #FFF1F2 0%, #FFFFFF 100%);
+        }
+        .compare-card.good {
+            border: 2px solid var(--accent-cyan-start);
+            background: linear-gradient(180deg, #EFF6FF 0%, #FFFFFF 100%);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+            z-index: 2;
+        }
+        .compare-header {
+            text-align: center;
+            padding-bottom: 24px;
+            margin-bottom: 28px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .compare-header h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .compare-header p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        .compare-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 36px;
+            flex-grow: 1;
+        }
+        .compare-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        .compare-list li.bad-item {
+            color: #BE123C;
+        }
+        .compare-list li.good-item {
+            color: #1D4ED8;
+        }
+        .icon-mark {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            line-height: 1.3;
+        }
+        .anchor-box {
+            background: #FFFBEB;
+            border: 1px solid #FCD34D;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin-top: auto;
+        }
+        .anchor-box h4 {
+            color: var(--accent-gold);
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        .anchor-box p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* Grid 3 USPs */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px 32px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow-sm);
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-cyan-start);
+            box-shadow: var(--shadow-lg);
+            background: var(--bg-card-hover);
+        }
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 28px;
+            color: var(--accent-cyan-start);
+        }
+        .card h3 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        .card p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        .card-badge {
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent-cyan-start);
+        }
+
+        /* Interactive Cost Calculator */
+        .calculator-section {
+            background: #F8FAFC;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .calc-box {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 32px;
+            padding: 56px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 48px;
+            align-items: center;
+            box-shadow: var(--shadow-lg);
+        }
+        .calc-inputs h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        .calc-inputs p {
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+        }
+        .slider-group {
+            margin-bottom: 32px;
+        }
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+        .slider-label span {
+            color: var(--accent-cyan-start);
+            font-size: 1.3rem;
+        }
+        input[type=range] {
+            width: 100%;
+            height: 10px;
+            background: #E2E8F0;
+            border-radius: 10px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--accent-cyan-start);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
+            transition: transform 0.1s;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        .calc-result {
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        .calc-result h4 {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+        .result-amount {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+        .result-sub {
+            color: var(--accent-gold);
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 24px;
+        }
+        .package-recommendation {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 14px;
+            padding: 18px;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            border: 1px solid rgba(255,255,255,0.1);
+            line-height: 1.6;
+        }
+
+        /* Pricing / Packages */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            align-items: stretch;
+        }
+        .price-card {
+            background: var(--bg-card);
+            border: 2px solid #CBD5E1;
+            border-radius: 20px;
+            padding: 36px 24px 28px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+            transition: all 0.25s ease;
+        }
+        .price-card:hover {
+            border-color: var(--accent-cyan-start);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+        .price-card.featured {
+            background: linear-gradient(180deg, #FFFFFF 0%, #EFF6FF 100%);
+            border: 2px solid var(--accent-cyan-start);
+            box-shadow: var(--shadow-featured);
+            z-index: 2;
+            transform: translateY(-4px);
+        }
+        .price-card.featured:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.25);
+        }
+        .price-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--accent-cyan-start), var(--accent-cyan-end));
+            color: #FFFFFF;
+            font-weight: 800;
+            font-size: 0.75rem;
+            padding: 6px 16px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+            white-space: nowrap;
+        }
+        .price-header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .price-header h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+        .price-amount {
+            font-size: 1.65rem;
+            font-weight: 800;
+            color: var(--accent-cyan-start);
+            line-height: 1.2;
+        }
+        .price-amount span {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            display: block;
+            margin-top: 4px;
+        }
+        .price-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 32px;
+            flex-grow: 1;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.45;
+        }
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #EFF6FF;
+            color: var(--accent-cyan-start);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .price-btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            display: block;
+            font-size: 0.95rem;
+        }
+        .price-btn-outline {
+            background: #FFFFFF;
+            border: 2px solid #94A3B8;
+            color: #0F172A;
+            font-weight: 800;
+        }
+        .price-btn-outline:hover {
+            background: #F1F5F9;
+            border-color: var(--accent-cyan-start);
+            color: var(--accent-cyan-start);
+        }
+        .price-btn-solid {
+            background: linear-gradient(135deg, var(--accent-cyan-start), var(--accent-cyan-end));
+            color: #FFFFFF;
+            box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.4);
+        }
+        .price-btn-solid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px -4px rgba(37, 99, 235, 0.55);
+        }
+
+        /* VIRAL REFERRAL LOOP SECTION (NEW) */
+        .referral-section {
+            background: linear-gradient(135deg, #EEF2FF 0%, #F8FAFC 100%);
+            border-top: 1px solid #E0E7FF;
+            border-bottom: 1px solid #E0E7FF;
+            position: relative;
+            overflow: hidden;
+        }
+        .referral-box {
+            background: #FFFFFF;
+            border: 2px solid #CBD5E1;
+            border-radius: 32px;
+            padding: 56px 48px;
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.08);
+            position: relative;
+            z-index: 2;
+        }
+        .referral-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .ref-card {
+            background: #F8FAFC;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 24px;
+            padding: 36px 28px;
+            text-align: center;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.06);
+        }
+        .ref-card:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            background: #FFFFFF;
+        }
+        .ref-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #EEF2FF;
+            border: 1px solid #C7D2FE;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin: 0 auto 24px;
+            color: var(--accent-purple);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+        }
+        .ref-card h3 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 14px;
+            color: var(--text-primary);
+        }
+        .ref-card p {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            line-height: 1.6;
+        }
+        .ref-cta-box {
+            margin-top: 50px;
+            text-align: center;
+            padding: 36px;
+            background: #EFF6FF;
+            border-radius: 20px;
+            border: 2px solid #93C5FD;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.1);
+        }
+
+        /* 3-Step Workflow */
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            position: relative;
+        }
+        .step-card {
+            background: var(--bg-card);
+            border: 1.5px solid #CBD5E1;
+            border-radius: 24px;
+            padding: 40px 32px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.06);
+        }
+        .step-card:hover {
+            border-color: var(--accent-cyan-start);
+            transform: translateY(-6px);
+        }
+        .step-num {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-cyan-start), var(--accent-cyan-end));
+            color: #FFFFFF;
+            font-size: 1.4rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.5);
+        }
+        .step-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        .step-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* FAQ Accordion */
+        .faq-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .faq-item {
+            background: #FFFFFF;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 18px;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        }
+        .faq-item.active {
+            border-color: var(--accent-cyan-start);
+            background: #F8FAFC;
+        }
+        .faq-question {
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            user-select: none;
+        }
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: var(--accent-cyan-start);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+            color: var(--accent-gold);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+            padding: 0 24px;
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 600px;
+            padding-bottom: 24px;
+            transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+        }
+
+        /* CTA Bottom */
+        .cta-bottom {
+            margin: 40px 0 80px;
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #EFF6FF 100%);
+            border: 2px solid var(--accent-cyan-start);
+            border-radius: 36px;
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .cta-bottom::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+        .cta-bottom h2 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 2;
+        }
+        .cta-bottom p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 680px;
+            margin: 0 auto 44px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            .pricing-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+            .price-card.featured { transform: scale(1); }
+            .compare-grid { grid-template-columns: 1fr; }
+            .referral-grid { grid-template-columns: 1fr; gap: 24px; }
+            .perks-banner { grid-template-columns: 1fr; gap: 28px; }
+        }
+        @media (max-width: 992px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 48px; }
+            .hero-content { text-align: center; }
+            .hero-content h1 { font-size: 3.1rem; }
+            .hero-content p { margin: 0 auto 32px; }
+            .hero-actions { justify-content: center; }
+            .float-badge.badge-top { left: 0px; top: 10px; font-size: 0.78rem; padding: 8px 14px; }
+            .float-badge.badge-right { right: 0px; bottom: 40px; font-size: 0.78rem; padding: 8px 14px; }
+            .float-badge.badge-bottom { left: 10px; bottom: -10px; font-size: 0.78rem; padding: 8px 14px; }
+            .hero-mascot-img { max-width: 320px; }
+            .grid-3, .workflow-grid { grid-template-columns: 1fr; }
+            .calc-box { grid-template-columns: 1fr; padding: 36px 28px; }
+            .formats-bar { flex-wrap: wrap; gap: 18px; justify-content: center; }
+            .referral-box { padding: 40px 24px; }
+        }
+        @media (max-width: 576px) {
+            .hero-content h1 { font-size: 2.35rem; }
+            .hero-actions { flex-direction: column; width: 100%; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+            .hero-mascot-img { max-width: 270px; }
+            .float-badge { font-size: 0.74rem; padding: 6px 12px; }
+            .float-badge.badge-top { left: -5px; top: 5px; }
+            .float-badge.badge-right { right: -5px; bottom: 35px; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .section-header h2 { font-size: 2.2rem; }
+            .cta-bottom h2 { font-size: 2.3rem; }
+            .cta-bottom { padding: 50px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Glowing Background -->
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+
+    <!-- Header / Nav -->
+    <header>
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <img src="new.png" alt="Vomni Bot" class="nav-bot-logo">
+                <span>⚡ VOMNI TRANSLATE</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#perks">🎁 Đặc Quyền</a></li>
+                <li><a href="#compare">⚖️ So Sánh</a></li>
+                <li><a href="#calculator">🧮 Ước Tính Phí</a></li>
+                <li><a href="#pricing">💎 Bảng Giá</a></li>
+            </ul>
+            <a href="https://telegram.me/Vomni_bot?start=landing" target="_blank" class="btn-header">🚀 Mở Bot Dịch Ngay</a>
+        </div>
+    </header>
+
+    <!-- Hero Section (2-Column Showcase) -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <!-- Left Column: Copy & Actions -->
+            <div class="hero-content">
+                <div class="hero-tag">🇻🇳 ✨ Trợ Lý Dịch Thuật Tiếng Việt Đẳng Cấp Bản Xứ</div>
+                <h1>Dịch Thuật Văn Bản Chuyên Sâu <br><span>Không Cần Sửa Format</span></h1>
+                <p>Giải pháp dịch thuật 5 Sao cho Word (.docx), Excel (.xlsx), PowerPoint (.pptx) và PDF text gốc (không scan) giữ layout 100%. Bạn không cần tải file về máy, chỉ cần bấm Share thẳng từ Zalo, Gmail qua Telegram để dịch thần tốc trong 3 giây!</p>
+                
+                <div class="hero-actions">
+                    <a href="https://telegram.me/Vomni_bot?start=landing" target="_blank" class="btn-primary">
+                        <span>⚡ Mở Bot Dịch Thử 1 Trang Miễn Phí</span>
+                    </a>
+                    <a href="#pricing" class="btn-secondary">💎 Xem Bảng Giá Tiết Kiệm</a>
+                </div>
+
+                <div class="formats-bar">
+                    <div class="format-item"><span class="format-icon">📄</span> Word (.docx)</div>
+                    <div class="format-item"><span class="format-icon">📊</span> Excel (.xlsx)</div>
+                    <div class="format-item"><span class="format-icon">📈</span> PowerPoint (.pptx)</div>
+                    <div class="format-item"><span class="format-icon">📑</span> PDF Text Gốc (Không Scan)</div>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Bot Mascot -->
+            <div class="hero-visual">
+                <div class="hero-visual-glow"></div>
+                <div class="hero-mascot-box">
+                    <img src="new.png" class="hero-mascot-img" alt="Vomni Translate Bot Mascot">
+                    <div class="float-badge badge-top">
+                        <span>🇻🇳 ↔️ 🇺🇸 🇨🇳 🇯🇵 Dịch Đa Ngữ Chuẩn Tiếng Việt</span>
+                    </div>
+                    <div class="float-badge badge-right">
+                        <span>🎯 Giữ Layout 100% • Không Lỗi Font</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+            <!-- FREE TRIAL & REFERRAL PERKS BANNER (NEW) -->
+            <div id="perks" class="perks-banner">
+                <div class="perk-item">
+                    <div class="perk-icon-wrapper">🎁</div>
+                    <div class="perk-text" style="text-align: left;">
+                        <h3>Tặng Ngay <span>1 Trang Dịch Thử FREE</span></h3>
+                        <p>Trải nghiệm dịch thử 1 trang trực tiếp trên chính file hợp đồng, báo cáo thực tế của bạn! Kiểm chứng độ chuẩn xác layout 100% và văn phong bản xứ mà không rủi ro, không mất một đồng nào!</p>
+                        <span class="perk-badge">✓ Trải nghiệm ngay không cần thanh toán</span>
+                    </div>
+                </div>
+                <div class="perk-item">
+                    <div class="perk-icon-wrapper" style="background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); color: var(--accent-gold);">🔥</div>
+                    <div class="perk-text" style="text-align: left;">
+                        <h3>Quà Tặng <span>Link Giới Thiệu VIP</span></h3>
+                        <p>Khi bạn truy cập vào Bot qua đường link giới thiệu từ bạn bè hoặc đồng nghiệp, bạn được tặng thêm ngay <b>+1,000 Vomni Coins Free Trial (~2 trang dịch miễn phí 100%)</b> cộng thẳng vào ví Vomni Wallet!</p>
+                        <span class="perk-badge" style="background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); color: var(--accent-gold);">🎁 Tặng +1,000 Vomni Coins (~2 trang free)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PSYCHOLOGICAL ANCHORING - COMPARISON SECTION (NEW) -->
+    <section id="compare" class="comparison-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>🧠 Vì Sao Sếp & Chuyên Gia <span>Không Bao Giờ Dùng Tool Miễn Phí?</span></h2>
+                <p>Hãy làm bài toán chi phí thời gian: Thời gian quý giá của bạn không sinh ra để hì hục ngồi sửa layout bảng biểu bị vỡ nát!</p>
+            </div>
+
+            <div class="compare-grid">
+                <!-- Bad Side: Free Tools -->
+                <div class="compare-card bad">
+                    <div class="compare-header">
+                        <h3 style="color: #F43F5E;">❌ Tool Dịch Miễn Phí / Giá Rẻ</h3>
+                        <p>Dịch máy thông thường, Google Translate, tool trôi nổi</p>
+                    </div>
+                    <ul class="compare-list">
+                        <li class="bad-item">
+                            <span class="icon-mark">⚠️</span>
+                            <span><b>Vỡ nát định dạng bảng biểu:</b> Bảng biểu xô lệch, mất ô, chữ đè lên nhau, hình ảnh biến mất hoặc sai vị trí nghiêm trọng trong Excel, PowerPoint.</span>
+                        </li>
+                        <li class="bad-item">
+                            <span class="icon-mark">⏰</span>
+                            <span><b>Tốn 3-4 giờ chỉnh sửa layout:</b> Bạn hoặc nhân viên phải hì hục copy-paste, canh dòng, kẻ lại từng bảng biểu một cách ức chế và mệt mỏi!</span>
+                        </li>
+                        <li class="bad-item">
+                            <span class="icon-mark">🤖</span>
+                            <span><b>Văn phong máy móc, sai thuật ngữ:</b> Dịch thô word-by-word, câu từ ngô nghê, gây mất uy tín nặng nề khi gửi cho Sếp lớn hay Đối tác nước ngoài.</span>
+                        </li>
+                        <li class="bad-item">
+                            <span class="icon-mark">🔓</span>
+                            <span><b>Rủi ro rò rỉ tài liệu mật:</b> Các web miễn phí thường lưu trữ công khai dữ liệu tải lên, nguy cơ lộ thông tin kinh doanh, hợp đồng pháp lý.</span>
+                        </li>
+                    </ul>
+                    <div class="anchor-box" style="border-color: rgba(244, 63, 94, 0.4); background: rgba(244, 63, 94, 0.08);">
+                        <h4 style="color: #F43F5E;">💸 HẬU QUẢ: Mất 3-4 Giờ + Mất Uy Tín</h4>
+                        <p>Tiết kiệm vài nghìn đồng nhưng đánh mất hàng giờ làm việc quý giá và sự chuyên nghiệp trong mắt đối tác!</p>
+                    </div>
+                </div>
+
+                <!-- Good Side: Vomni Translate -->
+                <div class="compare-card good">
+                    <div class="price-badge" style="top: -16px; background: linear-gradient(135deg, var(--accent-gold), #D97706); color: #000;">🏆 SỰ LỰA CHỌN 5 SAO</div>
+                    <div class="compare-header">
+                        <h3 style="color: var(--accent-cyan-start);">⚡ Trợ Lý Dịch Thuật Omni</h3>
+                        <p>Công nghệ AI bản xứ + Bảo toàn cấu trúc 100%</p>
+                    </div>
+                    <ul class="compare-list">
+                        <li class="good-item">
+                            <span class="icon-mark">💎</span>
+                            <span><b>Giữ nguyên 100% Layout & Bảng biểu:</b> Chuẩn form Word, Excel, PPTX, PDF. Bảng biểu phức tạp đến mấy cũng nguyên vẹn 100%. Dịch xong dùng được hoặc in ấn ngay!</span>
+                        </li>
+                        <li class="good-item">
+                            <span class="icon-mark">🚀</span>
+                            <span><b>Tiết kiệm 3-4 giờ đồng hồ quý giá:</b> Bạn không mất dù chỉ 1 phút sửa format. Mua lại 4 giờ rảnh rỗi để tập trung làm việc lớn hoặc thảnh thơi nhâm nhi cà phê!</span>
+                        </li>
+                        <li class="good-item">
+                            <span class="icon-mark">🎯</span>
+                            <span><b>Văn phong Chuyên gia Bản xứ:</b> Hiểu sâu ngữ cảnh kinh doanh, hợp đồng pháp lý, tài liệu kỹ thuật, báo cáo tài chính. Thuật ngữ chuẩn xác tuyệt đối!</span>
+                        </li>
+                        <li class="good-item">
+                            <span class="icon-mark">🛡️</span>
+                            <span><b>Bảo mật tuyệt đối 100% trên Telegram:</b> Hoạt động khép kín trong khung chat Telegram cá nhân. Mã hóa dữ liệu cao nhất, tự động xóa sạch file tạm sau khi dịch!</span>
+                        </li>
+                    </ul>
+                    <div class="anchor-box">
+                        <h4>💡 CHỈ 5,000 VNĐ / TRANG (Chưa bằng 1 cốc trà đá!)</h4>
+                        <p>Hoặc chỉ từ <b>2,777 VNĐ/trang</b> khi mua gói trả trước. Khoản đầu tư thông minh nhất để bảo vệ thời gian và uy tín của bạn!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us (3 USPs) -->
+    <section id="benefits">
+        <div class="container">
+            <div class="section-header">
+                <h2>3 Đặc Quyền Vượt Trội <span>Dành Riêng Cho Bạn</span></h2>
+                <p>Khác biệt hoàn toàn với các công cụ dịch máy thô cứng hay Google Translate làm vỡ nát bố cục bảng biểu của bạn.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div>
+                        <div class="card-icon">📑</div>
+                        <h3>Giữ Nguyên 100% Layout</h3>
+                        <p>Chuẩn form Word (.docx), bảng biểu phức tạp trong Excel (.xlsx), slide thuyết trình PowerPoint (.pptx) và PDF text gốc (không scan). Dịch xong bạn có thể gửi đối tác hoặc in ấn ngay lập tức mà không mất 1 phút chỉnh sửa format!</p>
+                    </div>
+                    <div class="card-badge">⚡ Tiết kiệm 90% thời gian chỉnh trang</div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon">🎯</div>
+                        <h3>Chuyên Gia Bản Xứ Đầu Ngành</h3>
+                        <p>Mỗi tài liệu của bạn đều được dịch thuật và chăm chút tỉ mỉ như bởi chính chuyên gia người bản xứ trong đúng lĩnh vực kinh doanh, hợp đồng, kỹ thuật hay tài chính. Văn phong mượt mà, tuyệt đối không dịch thô word-by-word!</p>
+                    </div>
+                    <div class="card-badge">🏆 Uy tín tuyệt đối khi làm việc với Sếp/Đối tác</div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon">🚀</div>
+                        <h3>Dịch Thần Tốc - Share 1 Chạm</h3>
+                        <p>Dù bạn đang đọc tài liệu trên Zalo, Gmail hay Google Drive, chỉ cần bấm nút "Chia sẻ" (Share/Forward) thẳng vào Bot Telegram là có ngay bản dịch trong vài giây. Dịch xong chuyển tiếp lại cho đồng nghiệp chỉ với 1 chạm!</p>
+                    </div>
+                    <div class="card-badge">📱 Trải nghiệm di động tiện lợi vô địch</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Cost Calculator -->
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>🧮 Ước Tính Chi Phí <span>Dịch Thuật</span></h2>
+                <p>Kéo thanh trượt bên dưới để chọn số trang tài liệu cần dịch. Hệ thống sẽ tự động so sánh chi phí trả lẻ và mẹo mua gói tiết kiệm cho bạn!</p>
+            </div>
+
+            <div class="calc-box">
+                <div class="calc-inputs">
+                    <h3>Thông Số Hồ Sơ Của Bạn</h3>
+                    <p>Hệ thống hỗ trợ đếm trang tự động cực kỳ chuẩn xác ngay khi bạn ném file vào Bot.</p>
+
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>📚 Số trang tài liệu cần dịch:</span>
+                            <span id="val-pages">25 trang</span>
+                        </div>
+                        <input type="range" id="slider-pages" min="1" max="200" step="1" value="25">
+                    </div>
+
+                    <div style="margin-top: 32px; padding: 20px; background: #F8FAFC; border-radius: 16px; border: 1px solid #E2E8F0;">
+                        <div style="font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">💡 Giá trị bạn nhận được:</div>
+                        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.95rem; color: var(--text-secondary);">
+                            <li>✓ Giữ nguyên 100% định dạng Layout, bảng biểu</li>
+                            <li>✓ Dịch chuyên sâu văn phong chuyên gia bản xứ</li>
+                            <li>✓ Trả file tốc độ cao trong vài chục giây</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="calc-result">
+                    <h4>CHI PHÍ TRẢ THEO BÀI LẺ (5,000 VNĐ/TRANG)</h4>
+                    <div class="result-amount" id="calc-payg">125,000 VNĐ</div>
+                    <div class="result-sub" id="calc-save-badge">
+                        <span>🔥 Mẹo: Mua Gói 100,000 VNĐ tiết kiệm 25,000 VNĐ & dư trang!</span>
+                    </div>
+                    <div class="package-recommendation" id="calc-rec">
+                        💡 <b>Khuyên dùng:</b> Mua <b>Gói Tiêu Chuẩn 100,000 VNĐ</b> (nhận 32 trang). Bạn dịch xong hồ sơ 25 trang này vẫn còn <b>dư 7 trang</b> dùng dần cho các lần sau không mất thêm tiền!
+                    </div>
+                    <a href="https://telegram.me/Vomni_bot?start=landing" target="_blank" class="btn-primary" style="margin-top: 28px; justify-content: center; width: 100%;">
+                        <span>🚀 Gửi File Vào Bot Báo Giá Ngay</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / Packages -->
+    <section id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Bảng Giá Nạp <span>Vomni Coins</span> Trả Trước</h2>
+                <p>Nền kinh tế Vomni Coins: <b>10 VNĐ = 1 Coin</b> (Định mức cơ sở: <b>500 Coins / Trang</b>). Mua gói trả trước giúp bạn được tặng thêm tới <b>80% Bonus Coins</b>, không lo làm tròn số trang thập phân và bảo lưu số dư vĩnh viễn!</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Card 1: Pay As You Go / Dịch Lẻ -->
+                <div class="price-card">
+                    <div class="price-header">
+                        <h3>DỊCH LẺ TỪNG BÀI</h3>
+                        <div class="price-amount">5,000 VNĐ <span>/ Trang (Quy đổi: 500 Coins/trang)</span></div>
+                    </div>
+                    <ul class="price-features">
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text"><b>Dịch bao nhiêu thanh toán bấy nhiêu theo số trang, không áp lực mua gói lớn</b></span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Trừ chính xác theo số trang/dung lượng thực tế (kể cả bài lẻ 1.4 trang = 7,000 VNĐ)</span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Giữ nguyên 100% định dạng Layout bảng biểu Word/Excel/PPTX/PDF</span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Chất lượng dịch thuật ngữ AI bản xứ chuẩn in ấn, không cần chỉnh sửa</span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Thanh toán tự động qua quét mã VietQR nhận kết quả sau 10 giây</span></li>
+                    </ul>
+                    <a href="https://telegram.me/Vomni_bot?start=landing" target="_blank" class="price-btn price-btn-outline">Gửi File & Dịch Bài Lẻ Ngay</a>
+                </div>
+
+                <!-- Card 2: Package 50k -->
+                <div class="price-card">
+                    <div class="price-header">
+                        <h3>GÓI KHỞI ĐỘNG</h3>
+                        <div class="price-amount">7,000 Coins <span>Tương đương ~14 trang chuẩn (+40% Bonus)</span></div>
+                    </div>
+                    <ul class="price-features">
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Chi phí cực tiết kiệm chỉ còn <b>~3,570 VNĐ / trang dịch chuẩn</b></span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Coins bảo lưu vĩnh viễn, dùng dần cho nhiều tài liệu khác nhau không hết hạn</span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Trừ chính xác theo dung lượng/trang thực tế, không bị làm tròn hao hụt</span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Giữ nguyên 100% định dạng Layout bảng biểu, không lỗi font</span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Tốc độ xử lý đa luồng ưu tiên, trả file thần tốc cho công việc</span></li>
+                    </ul>
+                    <a href="https://telegram.me/Vomni_bot?start=landing" target="_blank" class="price-btn price-btn-outline">Nạp Gói Khởi Động (50,000 VNĐ)</a>
+                </div>
+
+                <!-- Card 3: Package 100k (Featured Best Seller) -->
+                <div class="price-card featured">
+                    <div class="price-badge">🔥 PHỔ BIẾN NHẤT (+60% BONUS)</div>
+                    <div class="price-header">
+                        <h3>GÓI TIÊU CHUẨN</h3>
+                        <div class="price-amount">16,000 Coins <span>Tương đương ~32 trang chuẩn (+60% Bonus)</span></div>
+                    </div>
+                    <ul class="price-features">
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Chi phí siêu tiết kiệm chỉ còn <b>~3,125 VNĐ / trang (Giảm tới 37%)</b></span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text"><b>Best Seller:</b> Được 86% Kỹ sư & Dân văn phòng chọn để dịch hợp đồng, báo cáo</span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Coins bảo lưu vĩnh viễn không hết hạn, có thể chia sẻ cho đồng nghiệp dùng</span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Ưu tiên xử lý tài liệu đa luồng thần tốc gấp 2 lần, không phải xếp hàng</span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Tặng đặc quyền <b>dịch thử 1 trang hoàn toàn miễn phí</b> để kiểm chứng chất lượng</span></li>
+                    </ul>
+                    <a href="https://telegram.me/Vomni_bot?start=landing" target="_blank" class="price-btn price-btn-solid">Nạp Gói Tiêu Chuẩn Best Seller (100k)</a>
+                </div>
+
+                <!-- Card 4: Package 500k VIP -->
+                <div class="price-card">
+                    <div class="price-header">
+                        <h3>GÓI DOANH NGHIỆP VIP</h3>
+                        <div class="price-amount">90,000 Coins <span>Tương đương ~180 trang chuẩn (+80% Bonus)</span></div>
+                    </div>
+                    <ul class="price-features">
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Đơn giá tối ưu nhất chỉ còn <b>~2,770 VNĐ / trang (Siêu tiết kiệm cho Cty)</b></span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Phù hợp dự án lớn, hồ sơ thầu, hợp đồng kinh doanh, tài liệu kỹ thuật Word/Excel/PPTX/PDF text gốc</span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Coins bảo lưu vĩnh viễn cho toàn bộ phòng ban công ty sử dụng chung</span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Luồng xử lý Server VIP ưu tiên gấp 3 lần, cam kết thời gian hoàn thành nhanh nhất</span></li>
+                        <li class="feature-item"><span class="check-icon">✓</span><span class="feature-text">Hỗ trợ xuất hóa đơn VAT doanh nghiệp & CSKH riêng 1:1 qua Zalo/Telegram 24/7</span></li>
+                    </ul>
+                    <a href="https://telegram.me/Vomni_bot?start=landing" target="_blank" class="price-btn price-btn-outline">Nạp Gói VIP (500,000 VNĐ)</a>
+                </div>
+            </div>
+
+            <!-- Trust Guarantee Bar -->
+            <div style="margin-top: 40px; padding: 24px 32px; background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 20px; display: flex; align-items: center; gap: 20px; box-shadow: var(--shadow-sm);">
+                <div style="font-size: 2.2rem; flex-shrink: 0;">🛡️</div>
+                <div>
+                    <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 4px;">Cam Kết Hoàn 100% Coins & Bảo Hành Layout Tuyệt Đối</h4>
+                    <p style="font-size: 0.93rem; color: var(--text-secondary); line-height: 1.5; margin: 0;">Hệ thống Vomni AI tự động bóc tách và giữ nguyên 100% định dạng bảng biểu, màu sắc trong file văn phòng Word (.docx), Excel (.xlsx), PowerPoint (.pptx) và PDF text gốc (không hỗ trợ dịch PDF scan hay chụp ảnh). Nếu tài liệu bị xô lệch layout hoặc lỗi font kỹ thuật, <b>Bot cam kết hoàn lại 100% số Coins về ví của bạn trong vòng 3 giây</b>, đồng thời hỗ trợ dịch lại hoàn toàn miễn phí. Bạn được <b>dịch thử 1 trang hoàn toàn miễn phí</b> trước khi quyết định nạp!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIRAL REFERRAL LOOP SECTION (NEW) -->
+    <section id="referral" class="referral-section">
+        <div class="container">
+            <div class="referral-box">
+                <div class="section-header" style="margin-bottom: 20px;">
+                    <div style="display: inline-block; background: rgba(129, 140, 248, 0.15); color: var(--accent-purple); padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; border: 1px solid rgba(129, 140, 248, 0.4);">🔄 Vòng Lặp Giới Thiệu Lan Tỏa (Viral Affiliate)</div>
+                    <h2>Chia Sẻ Bạn Bè - <span>Kiếm Tiền Nhận Hoa Hồng Đến 50%</span></h2>
+                    <p>Dùng tốt thì đừng giữ một mình! Hãy bấm nút "Giới thiệu" trong Bot Telegram để chia sẻ cho đồng nghiệp, bạn bè và tạo ngay nguồn thu nhập thụ động cực kỳ hấp dẫn!</p>
+                </div>
+
+                <div class="referral-grid">
+                    <div class="ref-card">
+                        <div class="ref-icon">💰</div>
+                        <h3>Hoa Hồng Siêu Khủng 50%</h3>
+                        <p>Nhận ngay <b>50% hoa hồng tiền mặt</b> cho đơn nạp tiền đầu tiên của người bạn giới thiệu, và hưởng tiếp <b>15% - 30% hoa hồng trọn đời</b> cho mọi đơn nạp tiếp theo! Rút tiền nhanh chóng qua chuyển khoản ATM!</p>
+                    </div>
+
+                    <div class="ref-card">
+                        <div class="ref-icon">🎁</div>
+                        <h3>Quà Tặng Cho Bạn Bè</h3>
+                        <p>Người được bạn giới thiệu qua link sẽ nhận ngay quà tặng chào mừng VIP: <b>+1,000 Vomni Coins Free Trial (~2 trang dịch miễn phí 100%)</b>. Đây là "mồi câu" không rủi ro giúp bạn dễ dàng lan tỏa cho bạn bè, đồng nghiệp!</p>
+                    </div>
+
+                    <div class="ref-card">
+                        <div class="ref-icon">🚀</div>
+                        <h3>Lan Tỏa Dễ Dàng 1 Cú Nhấp</h3>
+                        <p>Copy đường link riêng của bạn trong Bot và gửi vào group Zalo công ty, hội sinh viên, group kỹ sư, hay đính kèm dưới bio TikTok/Facebook. Tiền hoa hồng tự động nhảy vào ví mỗi ngày!</p>
+                    </div>
+                </div>
+
+                <div class="ref-cta-box">
+                    <h3 style="font-size: 1.55rem; font-weight: 800; margin-bottom: 12px; color: #0F172A;">✨ Bạn Đã Sẵn Sàng Tạo Nguồn Thu Nhập Thụ Động?</h3>
+                    <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto 24px; font-size: 1.05rem;">Mở Bot Telegram, chọn menu <b>"🤝 Giới thiệu kiếm tiền"</b> để copy đường link Affiliate độc quyền của bạn ngay lập tức!</p>
+                    <a href="https://telegram.me/Vomni_bot?start=landing" target="_blank" class="btn-primary" style="background: linear-gradient(135deg, var(--accent-cyan-start), var(--accent-cyan-end)); color: #FFFFFF; font-size: 1.15rem; padding: 18px 42px;">
+                        <span>💸 Mở Bot Lấy Link Giới Thiệu Kiếm Tiền Ngay</span>
+                    </a>
+                    
+                    <!-- Link Giới Thiệu KOL/KOC Affiliate -->
+                    <div style="margin-top: 24px;">
+                        <a href="https://vomni.io.vn/aff" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.98rem; font-weight: 700; color: #4F46E5; text-decoration: none; padding: 12px 28px; border-radius: 100px; background: rgba(79, 70, 229, 0.08); border: 1.5px solid rgba(79, 70, 229, 0.25); transition: all 0.25s ease;">
+                            <span>👑 Bạn là KOL/KOC có nhiều Fan? Tìm hiểu Cổng Đại Sứ & Tạo Mã Giảm Giá Riêng tại đây ➔</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3-Step Workflow -->
+    <section id="workflow">
+        <div class="container">
+            <div class="section-header">
+                <h2>Quy Trình 3 Bước <span>Siêu Đơn Giản</span></h2>
+                <p>Hoàn toàn không cần đăng ký tài khoản phức tạp hay mở máy tính. Trải nghiệm 100% tự động trên Telegram.</p>
+            </div>
+
+            <div class="workflow-grid">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3>Mở Bot & Ném File</h3>
+                    <p>Mở Bot Telegram <b>@Vomni_bot</b>. Ném thẳng file tài liệu (Word, Excel, PowerPoint, PDF text gốc) hoặc bấm "Chia sẻ" (Share/Forward) từ Zalo, Gmail thẳng vào Bot.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3>Dịch Thử 1 Trang Free</h3>
+                    <p>Hệ thống tự động đếm trang và báo giá trong tích tắc. Bạn có thể bấm nút <b>"👁️ Dịch thử 1 trang MIỄN PHÍ"</b> để kiểm chứng độ chuẩn xác của layout và văn phong!</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3>Thanh Toán & Nhận File</h3>
+                    <p>Quét mã QR thanh toán tự động trong 3 giây. Hệ thống lập tức trả về file dịch hoàn chỉnh giữ nguyên 100% bố cục layout để bạn gửi Sếp hoặc in ấn ngay!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Câu Hỏi Thường Gặp <span>(FAQ)</span></h2>
+                <p>Giải đáp mọi thắc mắc về độ chuẩn xác layout, chất lượng dịch thuật, bảo mật dữ liệu và chính sách trang dịch.</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>1. Vì sao tôi nên trả 5,000 VNĐ/trang thay vì dùng các công cụ dịch miễn phí trên mạng?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <b>Hãy tính toán bài toán chi phí thời gian!</b> Nếu dùng công cụ miễn phí hay dịch máy thông thường, bảng biểu Excel, Word hay slide PowerPoint của bạn sẽ bị vỡ nát layout, lỗi font và mất hình ảnh. Bạn hoặc nhân viên sẽ phải tốn <b>3-4 giờ đồng hồ</b> hì hục ngồi sửa lại từng dòng! Thời gian và công sức đó có giá trị gấp hàng chục lần! Chỉ với <b>5,000 VNĐ/trang (chưa bằng 1 cốc trà đá)</b> hoặc từ <b>2,777 VNĐ/trang</b>, Trợ lý Dịch thuật Omni giúp bạn nhận lại file chuẩn xác 100% layout, gửi ngay cho Sếp hoặc Đối tác với sự tự tin và uy tín tuyệt đối!
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>2. Chất lượng AI kết hợp chuyên gia bản xứ của Vomni Translate vượt trội như thế nào?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Khác với các phần mềm dịch thô word-by-word máy móc, công nghệ lõi của Vomni Translate hiểu sâu ngữ cảnh chuyên ngành, nắm bắt văn phong hợp đồng thương mại, pháp lý, kỹ thuật điện - cơ khí, hay tài chính ngân hàng. Thuật ngữ được chuẩn hóa tự nhiên và chuẩn xác 100% như được dịch bởi chuyên gia bản xứ lâu năm trong nghề. Bạn hoàn toàn yên tâm khi sử dụng cho các dự án quan trọng!
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>3. Tài liệu kinh doanh, hợp đồng mật của tôi có được cam kết bảo mật riêng tư 100% trên Telegram không?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <b>Cam kết bảo mật tuyệt đối 100%!</b> Toàn bộ quá trình diễn ra khép kín trong khung chat Telegram cá nhân của bạn. Hệ thống áp dụng tiêu chuẩn mã hóa dữ liệu cao nhất, tự động xóa sạch file tạm sau khi dịch xong và không bao giờ lưu trữ công khai hay chia sẻ cho bất kỳ bên thứ ba nào. Bạn hoàn toàn yên tâm khi dịch các tài liệu nội bộ, hợp đồng bảo mật!
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>4. Bot dịch có giữ nguyên được định dạng bảng biểu phức tạp trong Excel hay PowerPoint không?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <b>Tuyệt đối 100% giữ nguyên layout!</b> Công nghệ độc quyền của chúng tôi bóc tách chuẩn xác từng thẻ cấu trúc của Word (.docx), Excel (.xlsx), PowerPoint (.pptx) và PDF text gốc (không hỗ trợ PDF scan hay ảnh chụp). Toàn bộ ô bảng biểu, màu nền, kích thước chữ, hình ảnh và định dạng đoạn văn được bảo toàn nguyên vẹn. Bạn dịch xong dùng được ngay mà không cần chỉnh sửa!
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>5. Tôi mua các gói Vomni Coins trả trước (50k, 100k, 500k), số Coins dư có bị hết hạn không?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <b>Không bao giờ hết hạn!</b> Khi bạn mua các Gói Vomni Coins Trả Trước Tiết Kiệm (`10 VNĐ = 1 Coin`), số Coins tín dụng sẽ được cộng thẳng vào ví Vomni Wallet trên Telegram và được bảo lưu vĩnh viễn, không bao giờ hết hạn. Bạn có thể sử dụng dịch lẻ từng trang hay trang lẻ (`1.4 trang = 700 Coins`) bất kỳ lúc nào tùy thích!
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>6. Tính năng "Share từ Zalo/Gmail vào Bot" sử dụng như thế nào?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Cực kỳ tiện lợi! Khi bạn đang đọc email trên Gmail, hoặc nhận tài liệu hợp đồng từ Sếp/Đối tác qua Zalo, WhatsApp, Google Drive hay iOS Files trên điện thoại: Bạn chỉ cần bấm nút <b>"Chia sẻ" (Share / Forward)</b> và chọn gửi thẳng vào Bot Telegram @Vomni_bot. Bot sẽ tự động nhận file và dịch ngay lập tức mà bạn không cần phải tải file về bộ nhớ máy!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section>
+        <div class="container">
+            <div class="cta-bottom">
+                <h2>Sẵn Sàng Trải Nghiệm <span>Dịch Thuật 5 Sao Chuẩn Layout?</span></h2>
+                <p>Mở Bot ngay hôm nay để trải nghiệm dịch thử 1 trang miễn phí trên file thực tế + nhận ngay +1,000 Vomni Coins Free Trial (~2 trang free) khi truy cập qua link giới thiệu!</p>
+                <a href="https://telegram.me/Vomni_bot?start=landing" target="_blank" class="btn-primary" style="font-size: 1.25rem; padding: 22px 48px;">
+                    <span>⚡ Mở Bot Telegram Dịch Ngay (Tặng +1,000 Coins Free)</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2026 VOMNI TRANSLATE AI. Trợ lý AI dịch thuật văn bản (PDF, Word, Excel, PPTX) giữ nguyên layout 5 Sao.</p>
+            <p style="margin-top: 8px; font-size: 0.82rem; color: #475569;">Bảo mật tuyệt đối 100% • Thanh toán QR Code tự động 3 giây • Giữ nguyên 100% Layout Word/Excel/PPTX/PDF</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // 1. Cost Calculator Logic
+        const sliderPages = document.getElementById('slider-pages');
+        const valPages = document.getElementById('val-pages');
+        const calcPayg = document.getElementById('calc-payg');
+        const calcSaveBadge = document.getElementById('calc-save-badge');
+        const calcRec = document.getElementById('calc-rec');
+
+        function updateCalculator() {
+            const pages = parseInt(sliderPages.value);
+            valPages.innerText = `${pages} trang`;
+
+            const paygCost = pages * 5000;
+            const coinsReq = pages * 500;
+            calcPayg.innerText = `${paygCost.toLocaleString('vi-VN')} VNĐ`;
+
+            // Recommendation Logic
+            if (pages <= 14) {
+                calcSaveBadge.innerHTML = `<span>⚡ Mẹo: Mua Gói Khởi Động 50,000 VNĐ (nhận 7,000 Coins ~ 14 trang) để tiết kiệm ~28% & dư Coins dùng trọn đời!</span>`;
+                const leftCoins = 7000 - coinsReq;
+                calcRec.innerHTML = `💡 <b>Khuyên dùng:</b> Mua <b>Gói Khởi Động 50,000 VNĐ</b> (nhận <b>7,000 Vomni Coins ~ 14 trang</b>). Bạn dịch xong hồ sơ ${pages} trang (tốn ${coinsReq.toLocaleString('vi-VN')} Coins), số dư <b>${leftCoins.toLocaleString('vi-VN')} Coins (~${(leftCoins/500).toFixed(1)} trang)</b> bảo lưu vĩnh viễn không bao giờ hết hạn!`;
+            } else if (pages <= 32) {
+                const saveAmount = paygCost - 100000;
+                const leftCoins = 16000 - coinsReq;
+                if (saveAmount > 0) {
+                    calcSaveBadge.innerHTML = `<span>🔥 Mẹo: Mua Gói Tiêu Chuẩn 100,000 VNĐ (16,000 Coins ~ 32 trang) tiết kiệm ngay ${saveAmount.toLocaleString('vi-VN')} VNĐ!</span>`;
+                } else {
+                    calcSaveBadge.innerHTML = `<span>🔥 Mẹo: Mua Gói Tiêu Chuẩn Best Seller 100,000 VNĐ (16,000 Coins ~ 32 trang) để được đơn giá siêu rẻ ~3,125 VNĐ/trang!</span>`;
+                }
+                calcRec.innerHTML = `💡 <b>Khuyên dùng (Best Seller 🔥):</b> Mua <b>Gói Tiêu Chuẩn 100,000 VNĐ</b> (nhận <b>16,000 Vomni Coins ~ 32 trang</b>). Bạn dịch xong hồ sơ ${pages} trang (tốn ${coinsReq.toLocaleString('vi-VN')} Coins), số dư <b>${leftCoins.toLocaleString('vi-VN')} Coins (~${(leftCoins/500).toFixed(1)} trang)</b> bảo lưu vĩnh viễn!`;
+            } else {
+                const saveAmount = paygCost - 500000;
+                const leftCoins = 90000 - coinsReq;
+                if (pages <= 180) {
+                    if (saveAmount > 0) {
+                        calcSaveBadge.innerHTML = `<span>👑 Mẹo VIP: Mua Gói Doanh Nghiệp 500,000 VNĐ (90,000 Coins ~ 180 trang) tiết kiệm ngay ${saveAmount.toLocaleString('vi-VN')} VNĐ!</span>`;
+                    } else {
+                        calcSaveBadge.innerHTML = `<span>👑 Mẹo VIP: Mua Gói Doanh Nghiệp 500,000 VNĐ (90,000 Coins ~ 180 trang) để được đơn giá rẻ nhất ~2,777 VNĐ/trang!</span>`;
+                    }
+                    calcRec.innerHTML = `💡 <b>Khuyên dùng cho Doanh nghiệp:</b> Mua <b>Gói Doanh Nghiệp 500,000 VNĐ</b> (nhận <b>90,000 Vomni Coins ~ 180 trang</b> | Tiết kiệm 44%). Bạn dịch hồ sơ ${pages} trang (tốn ${coinsReq.toLocaleString('vi-VN')} Coins), số dư <b>${leftCoins.toLocaleString('vi-VN')} Coins (~${(leftCoins/500).toFixed(1)} trang)</b> bảo lưu vĩnh viễn cho cả công ty!`;
+                } else {
+                    calcSaveBadge.innerHTML = `<span>👑 Hồ sơ quy mô lớn: Mua kết hợp Gói VIP 500,000 VNĐ (90,000 Coins / 180 trang) để đạt chi phí rẻ nhất!</span>`;
+                    calcRec.innerHTML = `💡 <b>Khuyên dùng:</b> Với hồ sơ quy mô lớn ${pages} trang (${coinsReq.toLocaleString('vi-VN')} Coins), bạn nên mua kết hợp các <b>Gói Doanh Nghiệp VIP 500,000 VNĐ</b> để tiết kiệm tới 44% chi phí so với trả lẻ từng trang!`;
+                }
+            }
+        }
+
+        sliderPages.addEventListener('input', updateCalculator);
+        updateCalculator();
+
+        // 2. FAQ Accordion Logic
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                faqItems.forEach(other => {
+                    if (other !== item) other.classList.remove('active');
+                });
+                item.classList.toggle('active');
+            });
+        });
+
+        // 3. Card Mouse Hover Glow Effect
+        const cards = document.querySelectorAll('.card, .price-card, .ref-card, .compare-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body>
+</html>
